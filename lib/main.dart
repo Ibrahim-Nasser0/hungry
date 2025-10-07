@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'First Method',
+        
 
-          // You can use the library anywhere in the app even in theme
+       
           home: Root(),
         );
       },
