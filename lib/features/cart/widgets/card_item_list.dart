@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hungry/features/cart/data/cart_model.dart';
 import 'package:hungry/features/cart/widgets/cart_item_card.dart';
+import 'package:hungry/features/checkout/views/checkout_view.dart';
 
 import 'package:hungry/features/shared/gaps.dart';
 import 'package:hungry/features/shared/total_price_section.dart';
@@ -57,7 +58,19 @@ class CartItemsList extends StatelessWidget {
           if (index < products.length) {
             return CartItemCard(product: products[index]);
           } else {
-            return TotalPriceSection(text: 'Checkout', onTap: () {});
+            return TotalPriceSection(
+              text: 'Pay Now',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) {
+                      return CheckoutView();
+                    },
+                  ),
+                );
+              },
+            );
           }
         },
       ),
