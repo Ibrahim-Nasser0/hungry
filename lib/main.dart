@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry/features/auth/views/splash_view.dart';
+import 'package:hungry/features/auth/presentation/views/splash_view.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
