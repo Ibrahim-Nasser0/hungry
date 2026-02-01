@@ -1,7 +1,16 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hungry/core/constants/app_colors.dart';
-import 'package:hungry/features/profile/presentation/view/edit_profile.dart';
+import 'package:hungry/core/utils/app_router.dart';
+import 'package:hungry/core/utils/service_locator.dart';
+import 'package:hungry/features/auth/domain/use_cases/edit_profile_use_case.dart';
+import 'package:hungry/features/auth/domain/use_cases/get_profile_use_case.dart';
+import 'package:hungry/features/auth/presentation/view_model/Auth_cubit/auth_cubit.dart';
+import 'package:hungry/features/auth/presentation/view_model/profile_cubit/profile_cubit.dart';
+import 'package:hungry/features/auth/presentation/views/widgets/edit_profile.dart';
 import 'package:hungry/core/shared/widgets/custom_botton.dart';
 import 'package:hungry/core/shared/widgets/custom_text.dart';
 import 'package:hungry/core/shared/widgets/gaps.dart';
@@ -21,14 +30,27 @@ class ProfileView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              ProfileInfo(),
-              GapH(30),
-              SettingsCard(),
-              GapH(30),
-              CustomButton(text: "Logout", onTap: () {}, style: true),
-            ],
+          child: BlocProvider(
+            create: (context) => ProfileCubit(
+              getProfileUseCase: getIt<GetProfileUseCase>(),
+              editProfileUseCase: getIt<EditProfileUseCase>(),
+            ),
+            child: Column(
+              children: [
+                const ProfileInfo(),
+                const GapH(30),
+                const SettingsCard(),
+                const GapH(30),
+                CustomButton(
+                  text: "Logout",
+                  onTap: () async {
+                    await context.read<AuthCubit>().logout();
+                    GoRouter.of(context).pushReplacement(AppRouter.loginView);
+                  },
+                  style: true,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -90,27 +112,56 @@ class SettingsCard extends StatelessWidget {
   }
 }
 
-class ProfileInfo extends StatelessWidget {
+class ProfileInfo extends StatefulWidget {
   const ProfileInfo({super.key});
+
+  @override
+  State<ProfileInfo> createState() => _ProfileInfoState();
+}
+
+class _ProfileInfoState extends State<ProfileInfo> {
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<ProfileCubit>().fetchProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 100,
-            child: Image.asset('assets/icons/Mask group.png'),
-          ),
-          GapH(5),
-          CustomText(text: 'Ibrahim Nasser', weight: FontWeight.w700, size: 25),
-          CustomText(
-            text: '12baraka34@gmail.com',
-            weight: FontWeight.w400,
-            size: 16,
-            color: AppColors.text,
-          ),
-        ],
+      child: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, state) {
+          if (state is ProfileSuccess) {
+            return Column(
+              children: [
+                CircleAvatar(
+                  radius: 100,
+                  child: Image.asset('assets/icons/Mask group.png'),
+                ),
+                GapH(5),
+                CustomText(
+                  text: state.user.name,
+                  weight: FontWeight.w700,
+                  size: 25,
+                ),
+                CustomText(
+                  text: state.user.email,
+                  weight: FontWeight.w400,
+                  size: 16,
+                  color: AppColors.text,
+                ),
+              ],
+            );
+          } else if (state is ProfileFailure) {
+            log(state.errMessage);
+            return Center(child: Text(state.errMessage));
+          } else if (state is ProfileLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return Center(child: Text('Failed to load profile'));
+          }
+        },
       ),
     );
   }

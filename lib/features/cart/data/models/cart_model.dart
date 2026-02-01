@@ -9,7 +9,7 @@ class CartModel {
     required this.image,
     required this.title,
     required this.description,
-    this.price=0,
+    this.price = 0,
     this.quantity = 1,
   });
 

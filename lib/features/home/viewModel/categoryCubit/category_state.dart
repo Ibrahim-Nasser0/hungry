@@ -5,5 +5,3 @@ class CategoryState {
   final int selectedIndex;
   const CategoryState(this.selectedIndex);
 }
-
-

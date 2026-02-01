@@ -8,4 +8,3 @@ class CategoryCubit extends Cubit<CategoryState> {
 
   void selectCategory(int index) => emit(CategoryState(index));
 }
-

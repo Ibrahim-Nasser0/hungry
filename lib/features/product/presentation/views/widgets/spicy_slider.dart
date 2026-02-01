@@ -37,14 +37,14 @@ class SpicySlider extends StatelessWidget {
                   },
 
                   activeColor: (state.spicy < 0.2)
-                      ? const Color(0xFF66BB6A) 
+                      ? const Color(0xFF66BB6A)
                       : (state.spicy < 0.4)
-                      ? const Color(0xFFFFC107) 
+                      ? const Color(0xFFFFC107)
                       : (state.spicy < 0.6)
-                      ? const Color(0xFFFF7043) 
+                      ? const Color(0xFFFF7043)
                       : (state.spicy < 0.8)
-                      ? const Color(0xFFE53935) 
-                      : const Color(0xFFB71C1C), 
+                      ? const Color(0xFFE53935)
+                      : const Color(0xFFB71C1C),
                 );
               },
             ),

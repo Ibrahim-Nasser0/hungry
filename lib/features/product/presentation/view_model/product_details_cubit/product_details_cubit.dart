@@ -14,4 +14,5 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
       return false;
     }
   }
+  
 }

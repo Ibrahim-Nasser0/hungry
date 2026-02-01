@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hungry/features/auth/domain/entities/user_entity.dart';
 import 'package:hungry/features/home/data/models/product_model.dart';
 import 'package:hungry/features/home/viewModel/categoryCubit/category_cubit.dart';
 import 'package:hungry/features/home/viewModel/favoritesCubit/favorites_cubit.dart';
@@ -10,7 +11,8 @@ import 'package:hungry/features/home/presentation/views/widgets/search.dart';
 import 'package:hungry/core/shared/widgets/gaps.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  const HomeView({super.key, required this.user});
+  final UserEntity user;
   static const List<String> category = ['All', 'Combo', 'Sliders', 'Classic'];
 
   static List<ProductModel> products = [
@@ -67,7 +69,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               children: [
                 const GapH(73),
-                const CustomAppBar(),
+                CustomAppBar(user: user,),
                 const GapH(10),
                 const Search(),
                 const GapH(10),

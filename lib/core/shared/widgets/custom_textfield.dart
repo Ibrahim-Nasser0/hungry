@@ -46,16 +46,16 @@ class _CustomTextfieldState extends State<CustomTextfield> {
       controller: widget.controller,
       obscureText: _hidePassword,
 
-      cursorColor: AppColors.secondary,
+      cursorColor: AppColors.primary,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 16.w),
+        contentPadding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 18.w),
 
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(18.r),
           borderSide: BorderSide(color: Colors.white),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(18.r),
           borderSide: BorderSide(color: Colors.white),
         ),
 
@@ -64,20 +64,29 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                 onTap: () {
                   togglePassword();
                 },
-                child: Icon(CupertinoIcons.eye),
+                child: Icon(CupertinoIcons.eye, color: Colors.white),
               )
             : null,
-        label: Text(
+        // label: Text(
+        //   widget.hint,
+        //   style: TextStyle(
+        //     color: AppColors.secondary,
+        //     fontFamily: 'Roboto',
+        //     fontWeight: FontWeight.w700,
+        //   ),
+        // ),
+        hint: Text(
           widget.hint,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.secondary,
             fontFamily: 'Roboto',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w700,
           ),
         ),
 
+        hintFadeDuration: Duration(microseconds: 500),
         fillColor: Colors.white,
-        // filled: true,
+        filled: true,
       ),
     );
   }

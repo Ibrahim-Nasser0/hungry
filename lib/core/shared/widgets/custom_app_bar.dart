@@ -1,12 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hungry/core/constants/app_colors.dart';
 import 'package:hungry/core/shared/widgets/custom_text.dart';
 import 'package:hungry/core/shared/widgets/gaps.dart';
+import 'package:hungry/features/auth/domain/entities/user_entity.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, this.user});
+  final UserEntity? user;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +27,20 @@ class CustomAppBar extends StatelessWidget {
             ),
             const GapH(5),
             CustomText(
-              text: 'Hello, Ibrahim Nasser',
+              text: 'Hello, ${user?.name ?? "null"}',
               weight: FontWeight.w500,
               color: AppColors.text,
             ),
           ],
         ),
         Spacer(),
+
         CircleAvatar(
           radius: 30.r,
-          child: Image.asset(
-            'assets/icons/Mask group.png',
-            height: 60.h,
-            width: 60.w,
+          child: CachedNetworkImage(
+            imageUrl: user?.image ?? '',
+
+            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
       ],

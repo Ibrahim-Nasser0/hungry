@@ -2,31 +2,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry/core/constants/app_colors.dart';
-import 'package:hungry/features/profile/presentation/view/profile_view.dart';
+import 'package:hungry/features/auth/domain/entities/user_entity.dart';
+import 'package:hungry/features/auth/presentation/views/profile_view.dart';
 import 'package:hungry/features/cart/presentation/views/cart_view.dart';
 import 'package:hungry/features/home/presentation/views/home_view.dart';
 import 'package:hungry/features/orderHistory/presentation/views/order_history_view.dart';
 
-class Root extends StatefulWidget {
-  const Root({super.key});
+class Navbar extends StatefulWidget {
+  const Navbar({super.key, required this.user});
+  final UserEntity user;
 
   @override
-  State<Root> createState() => _RootState();
+  State<Navbar> createState() => _NavbarState();
 }
 
-class _RootState extends State<Root> {
+class _NavbarState extends State<Navbar> {
   late PageController controller = PageController();
   int currentScreen = 0;
-  final List<Widget> screens = [
-    HomeView(),
-    CartView(),
-    OrderHistoryView(),
-    ProfileView(),
-  ];
+  late final List<Widget> screens;
   @override
   void initState() {
-    controller = PageController(initialPage: currentScreen);
     super.initState();
+    screens = [
+      HomeView(user: widget.user),
+      CartView(),
+      OrderHistoryView(),
+      ProfileView(),
+    ];
+    controller = PageController(initialPage: currentScreen);
   }
 
   @override

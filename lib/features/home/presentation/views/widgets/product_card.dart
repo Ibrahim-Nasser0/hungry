@@ -68,7 +68,7 @@ class ProductCard extends StatelessWidget {
                           context.read<FavoritesCubit>().toggleFavorites();
                           product.isFavorite = state.isFavorite;
                         },
-                        
+
                         child: Icon(
                           product.isFavorite
                               ? CupertinoIcons.heart_fill

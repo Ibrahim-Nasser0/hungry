@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry/features/auth/presentation/views/splash_view.dart';
+import 'package:hungry/core/utils/app_router.dart';
+import 'package:hungry/core/utils/service_locator.dart';
+import 'package:hungry/features/auth/domain/use_cases/get_profile_use_case.dart';
+import 'package:hungry/features/auth/domain/use_cases/logout_use_case.dart';
+
+import 'package:hungry/features/auth/presentation/view_model/Auth_cubit/auth_cubit.dart';
 
 void main() async {
-  runApp(const MyApp());
+  setupServiceLocator();
+  runApp(
+    BlocProvider(
+      create: (context) => AuthCubit(
+        logoutUseCase: getIt<LogoutUseCase>(),
+        getProfileUseCase: getIt<GetProfileUseCase>(),
+      ),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +33,9 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
 
       builder: (_, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          home: SplashView(),
+          routerConfig: AppRouter.router,
         );
       },
     );

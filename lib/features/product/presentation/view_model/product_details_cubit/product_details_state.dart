@@ -3,6 +3,6 @@ class ProductDetailsState {
   const ProductDetailsState(this.spicy);
 }
 
-class SpicyLevel extends ProductDetailsState{
+class SpicyLevel extends ProductDetailsState {
   SpicyLevel(super.spicy);
 }

@@ -19,7 +19,7 @@ class SignupView extends StatelessWidget {
               SizedBox(height: 100.h),
               SvgPicture.asset('assets/logo/Hungry.svg', color: Colors.white),
               SizedBox(height: 70.h),
-              SignupForm(),
+              const SignupForm(),
             ],
           ),
         ),
