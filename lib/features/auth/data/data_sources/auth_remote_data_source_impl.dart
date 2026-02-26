@@ -11,7 +11,7 @@ import 'package:hungry/features/auth/domain/use_cases/params/update_profile_para
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   final ApiService _apiService;
-
+  @override
   AuthRemoteDataSourceImpl({required ApiService apiService})
     : _apiService = apiService;
 

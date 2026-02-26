@@ -7,6 +7,7 @@ import 'package:hungry/core/shared/widgets/custom_botton.dart';
 import 'package:hungry/core/shared/widgets/custom_text.dart';
 import 'package:hungry/core/shared/widgets/custom_textfield.dart';
 import 'package:hungry/core/utils/app_router.dart';
+import 'package:hungry/core/utils/validators.dart';
 import 'package:hungry/features/auth/domain/use_cases/params/signup_params.dart';
 import 'package:hungry/features/auth/presentation/view_model/signup_cubit/signup_cubit.dart';
 
@@ -57,16 +58,31 @@ class _SignupFormState extends State<SignupForm> {
           builder: (context, state) {
             return Column(
               children: [
-                CustomTextfield(hint: 'Name', controller: userNameController),
-                SizedBox(height: 20.h),
-
-                CustomTextfield(hint: 'Email', controller: emailController),
-                SizedBox(height: 20.h),
-
-                CustomTextfield(hint: 'Phone', controller: phoneController),
+                CustomTextfield(
+                  hint: 'Name',
+                  controller: userNameController,
+                  validator: (name) => nameValidator(name: name),
+                ),
                 SizedBox(height: 20.h),
 
                 CustomTextfield(
+                  hint: 'Email',
+                  controller: emailController,
+                  validator: (email) => emailValidator(email: email),
+                ),
+                SizedBox(height: 20.h),
+
+                CustomTextfield(
+                  validator: (phone) =>
+                      phoneValidator(phoneNumber: phone ?? ''),
+                  hint: 'Phone',
+                  controller: phoneController,
+                ),
+                SizedBox(height: 20.h),
+
+                CustomTextfield(
+                  validator: (password) =>
+                      passwordValidator(password: password),
                   hint: 'Password',
                   controller: passwordController,
                   obscure: true,
@@ -74,6 +90,10 @@ class _SignupFormState extends State<SignupForm> {
                 SizedBox(height: 20.h),
 
                 CustomTextfield(
+                  validator: (confimPassword) => confimPasswordValidator(
+                    confimPassword: confimPassword,
+                    password: passwordController.text,
+                  ),
                   hint: 'Confirm Password',
                   controller: confirmPasswordController,
                   obscure: true,

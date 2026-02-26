@@ -9,11 +9,15 @@ class CustomTextfield extends StatefulWidget {
     this.obscure = false,
     required this.hint,
     required this.controller,
+    this.validator,
+    this.keyboardType,
   });
 
   final String hint;
   final bool obscure;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
 
   @override
   State<CustomTextfield> createState() => _CustomTextfieldState();
@@ -36,13 +40,17 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: (v) {
-        if (v == null || v.isEmpty) {
-          return 'Please Fill ${widget.hint}';
-        }
-
-        return null;
-      },
+      keyboardType: widget.obscure
+          ? TextInputType.visiblePassword
+          : widget.keyboardType,
+      validator:
+          widget.validator ??
+          (v) {
+            if (v == null || v.isEmpty) {
+              return 'Please Fill ${widget.hint}';
+            }
+            return null;
+          },
       controller: widget.controller,
       obscureText: _hidePassword,
 
