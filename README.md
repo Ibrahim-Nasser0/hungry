@@ -50,7 +50,7 @@ This project strictly follows **Feature-Driven Clean Architecture** to ensure a 
 │                        PRESENTATION LAYER                            │
 │                                                                      │
 │    ┌─────────────┐      ┌────────────────┐      ┌────────────────┐   │
-│    │  Pages &    │ ───▶ │   BLoC/Cubit   │ ───▶ │    States &    │   │
+│    │  Pages &    │ ───▶ │   BLoC/Cubit   │ ───▶│    States &    │   │
 │    │  Screens    │      │   + Events     │      │    Widgets     │   │
 │    └─────────────┘      └───────┬────────┘      └────────────────┘   │
 │                                 │                                    │
@@ -185,10 +185,11 @@ lib/
 │   │   │       ├── login_usecase.dart
 │   │   │       └── register_usecase.dart
 │   │   └── presentation/
-│   │       ├── cubit/
+│   │       ├── view_model/
 │   │       │   ├── auth_cubit.dart
 │   │       │   └── auth_state.dart
 │   │       └── views/
+│   │           ├── widgets/                   # Ui Components
 │   │           ├── login_screen.dart
 │   │           └── register_screen.dart
 │   │
@@ -257,7 +258,6 @@ flutter run
 ```yaml
 dependencies:
   flutter_bloc: ^9.1.1            # BLoC & Cubit state management
-  bloc: ^9.0.0                    # Core BLoC library
   dio: ^5.9.0                     # HTTP client with interceptors
   get_it: ^9.2.0                  # Dependency injection / service locator
   dartz: ^0.10.1                  # Functional error handling (Either)
