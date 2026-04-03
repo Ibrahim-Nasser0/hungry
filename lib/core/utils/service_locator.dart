@@ -10,6 +10,12 @@ import 'package:hungry/features/auth/domain/use_cases/get_profile_use_case.dart'
 import 'package:hungry/features/auth/domain/use_cases/login_use_case.dart';
 import 'package:hungry/features/auth/domain/use_cases/logout_use_case.dart';
 import 'package:hungry/features/auth/domain/use_cases/signup_use_case.dart';
+import 'package:hungry/features/home/data/data_sources/remote/home_remote_data_source.dart';
+import 'package:hungry/features/home/data/data_sources/remote/home_remote_data_source_impl.dart';
+import 'package:hungry/features/home/data/repos/home_repo_impl.dart';
+import 'package:hungry/features/home/domain/repos/home_repo.dart';
+import 'package:hungry/features/home/domain/use_cases/fetch_by_category_use_case.dart';
+import 'package:hungry/features/home/domain/use_cases/fetch_categores_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -25,9 +31,20 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(authRemoteData: getIt<AuthRemoteDataSource>()),
   );
-  //End Auth Feature
 
-  //Use Cases
+  //End Auth Feature
+  //SearchOrGetByCategoryUseCase
+  //Home Feature
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(apiService: getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(remoteDataSource: getIt<HomeRemoteDataSource>()),
+  );
+  //End Home Feature
+
+  ////Use Cases
+  //Auth UseCases
   getIt.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(authRepo: getIt<AuthRepo>()),
   );
@@ -40,8 +57,17 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<EditProfileUseCase>(
     () => EditProfileUseCase(authRepo: getIt<AuthRepo>()),
   );
-  getIt.registerLazySingleton<GetProfileUseCase>(
-    () => GetProfileUseCase(authRepo: getIt<AuthRepo>()),
+  getIt.registerLazySingleton<FetchProfileUseCase>(
+    () => FetchProfileUseCase(authRepo: getIt<AuthRepo>()),
   );
-  //End Use Cases
+  //End Auth UseCases
+  //Home UseCases
+  getIt.registerLazySingleton<FetchCategoresUseCase>(
+    () => FetchCategoresUseCase(homeRepo: getIt<HomeRepo>()),
+  );
+  getIt.registerLazySingleton<FetchByCategoryUseCase>(
+    () => FetchByCategoryUseCase(homeRepo: getIt<HomeRepo>()),
+  );
+  //End Home UseCases
+  ////End Use Cases
 }

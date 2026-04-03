@@ -9,8 +9,8 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final LogoutUseCase logoutUseCase;
-  final GetProfileUseCase getProfileUseCase;
-  AuthCubit({required this.logoutUseCase, required this.getProfileUseCase,})
+  final FetchProfileUseCase getProfileUseCase;
+  AuthCubit({required this.logoutUseCase, required this.getProfileUseCase})
     : super(AuthInitial());
 
   Future<void> checkAuth() async {

@@ -5,7 +5,6 @@ import 'package:hungry/core/utils/app_router.dart';
 import 'package:hungry/core/utils/service_locator.dart';
 import 'package:hungry/features/auth/domain/use_cases/get_profile_use_case.dart';
 import 'package:hungry/features/auth/domain/use_cases/logout_use_case.dart';
-
 import 'package:hungry/features/auth/presentation/view_model/Auth_cubit/auth_cubit.dart';
 
 void main() async {
@@ -14,7 +13,7 @@ void main() async {
     BlocProvider(
       create: (context) => AuthCubit(
         logoutUseCase: getIt<LogoutUseCase>(),
-        getProfileUseCase: getIt<GetProfileUseCase>(),
+        getProfileUseCase: getIt<FetchProfileUseCase>(),
       ),
       child: const MyApp(),
     ),
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
 
-      builder: (_, child) {
+      builder: (context, child) {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: AppRouter.router,

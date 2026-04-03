@@ -1,4 +1,4 @@
-class ProductModel {
+class ProductEntite {
   final String image;
   final String title;
   final String description;
@@ -6,11 +6,13 @@ class ProductModel {
   bool isFavorite;
   double? price;
 
-  ProductModel({
+  ProductEntite({
     required this.image,
     required this.title,
     required this.description,
     this.rating = 0,
     this.isFavorite = false,
+    this.price,
+ 
   });
 }
