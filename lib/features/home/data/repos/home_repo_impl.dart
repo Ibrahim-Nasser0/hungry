@@ -52,10 +52,26 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, void>> toggleFavorites({required int productId}) async {
+  Future<Either<Failure, void>> toggleFavorites({
+    required int productId,
+  }) async {
     try {
-      final result = await remoteDataSource.toggleFavorites(productId: productId);
+      final result = await remoteDataSource.toggleFavorites(
+        productId: productId,
+      );
       return Right(result);
+    } on DioException catch (e) {
+      return Left(ApiExceptions.fromDioError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntite>>> fetchProductsBySearch({
+    required String query,
+  }) async {
+    try {
+      final result = await remoteDataSource.fetchProductsBySearch(query: query);
+      return Right(result.toEntity());
     } on DioException catch (e) {
       return Left(ApiExceptions.fromDioError(e));
     }

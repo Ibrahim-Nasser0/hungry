@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry/features/home/presentation/viewModel/get_products_cubit/get_products_cubit.dart';
 
 class Search extends StatelessWidget {
   const Search({super.key});
@@ -12,6 +14,10 @@ class Search extends StatelessWidget {
       shadowColor: Colors.grey,
       borderRadius: BorderRadius.circular(20.r),
       child: TextField(
+        onChanged: (value) {
+          context.read<GetProductsCubit>().searchProducts(query: value);
+        },
+
         decoration: InputDecoration(
           prefixIcon: Icon(CupertinoIcons.search),
           hintText: 'Search...',
