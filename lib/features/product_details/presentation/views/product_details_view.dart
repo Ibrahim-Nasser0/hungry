@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hungry/features/home/domain/entities/product_entite.dart';
+import 'package:hungry/features/product_details/presentation/view_model/product_details_cubit/product_details_cubit.dart';
+import 'package:hungry/features/product_details/presentation/views/widgets/side_options_section.dart';
+import 'package:hungry/features/product_details/presentation/views/widgets/spicy_slider.dart';
+import 'package:hungry/features/product_details/presentation/views/widgets/toppings_section.dart';
+import 'package:hungry/core/shared/widgets/gaps.dart';
+import 'package:hungry/core/shared/widgets/total_price_section.dart';
+
+class ProductDetailsView extends StatelessWidget {
+  final ProductEntite product;
+  const ProductDetailsView({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ProductDetailsCubit(),
+      child: Scaffold(
+        appBar: AppBar(),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                SpicySlider(product: product),
+                const GapH(30),
+                const ToppingsSection(),
+                const GapH(30),
+                const SideOptionsSection(),
+                const Spacer(),
+                TotalPriceSection(text: 'Add To Cart', onTap: () {}),
+                const GapH(10),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
