@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hungry/core/utils/service_locator.dart';
 import 'package:hungry/features/auth/domain/entities/user_entity.dart';
+import 'package:hungry/features/home/domain/repos/home_repo.dart';
 import 'package:hungry/features/home/presentation/viewModel/toggle_categoryCubit/toggle_category_cubit.dart';
 import 'package:hungry/features/home/presentation/viewModel/favoritesCubit/favorites_cubit.dart';
 import 'package:hungry/core/shared/widgets/custom_app_bar.dart';
@@ -17,7 +19,9 @@ class HomeView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ToggleCategoryCubit()),
-        BlocProvider(create: (context) => FavoritesCubit()),
+        BlocProvider(
+          create: (context) => FavoritesCubit(homeRepo: getIt<HomeRepo>()),
+        ),
       ],
 
       child: GestureDetector(

@@ -10,4 +10,5 @@ abstract class HomeRepo {
     required int category,
   });
   Future<Either<Failure, List<CategoryEntite>>> fetchCategores();
+  Future<Either<Failure, void>> toggleFavorites({required int productId});
 }

@@ -4,15 +4,14 @@ import 'package:hungry/features/home/domain/entities/product_entite.dart';
 
 extension ProductMapper on Product {
   List<ProductEntite> toEntity() {
-    // هنا نستدعي الـ Mapper الخاص بالـ Datum لكل عنصر في القائمة
     return data?.map((datum) => datum.toEntity()).toList() ?? [];
   }
 }
 
-// هذا هو الجزء الذي سيجعل كود الـ Repo يعمل معك
 extension DatumMapper on Datum {
   ProductEntite toEntity() {
     return ProductEntite(
+      id: id ?? 0,
       image: image ?? '',
       title: name ?? '',
       description: description ?? '',

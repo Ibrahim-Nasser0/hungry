@@ -50,4 +50,14 @@ class HomeRepoImpl extends HomeRepo {
       return Left(ApiExceptions.fromDioError(e));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> toggleFavorites({required int productId}) async {
+    try {
+      final result = await remoteDataSource.toggleFavorites(productId: productId);
+      return Right(result);
+    } on DioException catch (e) {
+      return Left(ApiExceptions.fromDioError(e));
+    }
+  }
 }

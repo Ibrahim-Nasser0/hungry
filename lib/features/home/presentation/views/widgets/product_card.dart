@@ -86,8 +86,9 @@ class ProductCard extends StatelessWidget {
                       return InkWell(
                         borderRadius: BorderRadius.circular(20),
                         onTap: () {
-                          
-                          context.read<FavoritesCubit>().toggleFavorites();
+                          context.read<FavoritesCubit>().toggleFavorites(
+                            productId: product.id,
+                          );
                           product.isFavorite = state.isFavorite;
                         },
 

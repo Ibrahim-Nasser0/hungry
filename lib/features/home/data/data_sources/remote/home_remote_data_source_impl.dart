@@ -14,7 +14,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<Category> fetchCategores() async {
     final Response result = await apiService.get(
-      endPoint: ApiEndpoints.getAllCategory,
+      endPoint: ApiEndpoints.fetchAllCategory,
     );
     Category categories = Category.fromJson(result.data);
 
@@ -24,7 +24,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<Product> fetchProductsByCategory({required int categoryID}) async {
     final Response result = await apiService.get(
-      endPoint: "${ApiEndpoints.getProductByCategory}?category_id=$categoryID",
+      endPoint: "${ApiEndpoints.fetchProductByCategory}?category_id=$categoryID",
       
     );
     Product product = Product.fromJson(result.data);
@@ -34,12 +34,23 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   @override
   Future<Datum> fetchProductByID({required String id}) async {
     final Response response = await apiService.get(
-      endPoint: ApiEndpoints.getProductByID,
+      endPoint: ApiEndpoints.fetchProductByID,
       data: {
         'id': id,
       },
     );
 
     return Datum.fromJson(response.data['data']);
+  }
+  
+  @override
+  Future<void> toggleFavorites({required int productId}) async {
+    final Response response = await apiService.post(
+      endPoint: ApiEndpoints.toggleFavorites,
+      data: {
+        'product_id': productId,
+      },
+    );
+    return response.data;
   }
 }
