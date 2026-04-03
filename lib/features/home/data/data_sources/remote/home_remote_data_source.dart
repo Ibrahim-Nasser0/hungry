@@ -6,4 +6,6 @@ abstract class HomeRemoteDataSource {
   Future<Category> fetchCategores();
   Future<Datum> fetchProductByID({required String id});
   Future<Product> fetchProductsByCategory({required int categoryID});
+  Future<void> toggleFavorites({required int productId});
+  Future<Product> fetchProductsBySearch({required String query});
 }

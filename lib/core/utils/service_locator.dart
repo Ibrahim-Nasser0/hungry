@@ -16,6 +16,8 @@ import 'package:hungry/features/home/data/repos/home_repo_impl.dart';
 import 'package:hungry/features/home/domain/repos/home_repo.dart';
 import 'package:hungry/features/home/domain/use_cases/fetch_by_category_use_case.dart';
 import 'package:hungry/features/home/domain/use_cases/fetch_categores_use_case.dart';
+import 'package:hungry/features/home/domain/use_cases/search_products_use_case.dart';
+import 'package:hungry/features/home/domain/use_cases/toggle_favorite_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -67,6 +69,12 @@ void setupServiceLocator() {
   );
   getIt.registerLazySingleton<FetchByCategoryUseCase>(
     () => FetchByCategoryUseCase(homeRepo: getIt<HomeRepo>()),
+  );
+  getIt.registerLazySingleton<ToggleFavoritesUseCase>(
+    () => ToggleFavoritesUseCase(homeRepo: getIt<HomeRepo>()),
+  );
+  getIt.registerLazySingleton<SearchProductsUseCase>(
+    () => SearchProductsUseCase(homeRepo: getIt<HomeRepo>()),
   );
   //End Home UseCases
   ////End Use Cases

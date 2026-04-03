@@ -9,5 +9,10 @@ abstract class HomeRepo {
   Future<Either<Failure, List<ProductEntite>>> fetchProductsByCategory({
     required int category,
   });
+   Future<Either<Failure, List<ProductEntite>>> fetchProductsBySearch({
+    required String query,
+  });
   Future<Either<Failure, List<CategoryEntite>>> fetchCategores();
+  Future<Either<Failure, void>> toggleFavorites({required int productId});
+  
 }

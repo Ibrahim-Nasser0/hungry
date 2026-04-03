@@ -1,4 +1,5 @@
 class ProductEntite {
+  final int id;
   final String image;
   final String title;
   final String description;
@@ -7,6 +8,7 @@ class ProductEntite {
   double? price;
 
   ProductEntite({
+    required this.id,
     required this.image,
     required this.title,
     required this.description,
