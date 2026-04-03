@@ -9,7 +9,7 @@ import 'package:hungry/features/auth/domain/use_cases/params/update_profile_para
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  final GetProfileUseCase getProfileUseCase;
+  final FetchProfileUseCase getProfileUseCase;
   final EditProfileUseCase editProfileUseCase;
 
   UserEntity? currentUser;

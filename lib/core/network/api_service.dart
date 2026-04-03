@@ -7,9 +7,9 @@ class ApiService {
 
   ApiService({required this.dioClint});
 
-  Future<dynamic> get({required String endPoint}) async {
+  Future<dynamic> get({required String endPoint, Map<String, dynamic>? data}) async {
     try {
-      final Response response = await dioClint.dio.get(endPoint);
+      final Response response = await dioClint.dio.get(endPoint, data: data);
       return response;
     } catch (e) {
       if (e is DioError) {

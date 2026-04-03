@@ -5,9 +5,11 @@ import 'package:hungry/features/product/presentation/view_model/product_details_
 import 'package:hungry/features/product/presentation/view_model/product_details_cubit/product_details_state.dart';
 import 'package:hungry/core/shared/widgets/custom_text.dart';
 import 'package:hungry/core/shared/widgets/gaps.dart';
+import 'package:hungry/features/home/domain/entities/product_entite.dart';
 
 class SpicySlider extends StatelessWidget {
-  const SpicySlider({super.key});
+  const SpicySlider({super.key, required this.product});
+  final ProductEntite product;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class SpicySlider extends StatelessWidget {
               text:
                   'Customize Your Burger\n to Your Tastes.\n Ultimate\n Experience',
               weight: FontWeight.w600,
-              // size: 18,
+              size: 18,
             ),
             const GapH(5),
             BlocBuilder<ProductDetailsCubit, ProductDetailsState>(

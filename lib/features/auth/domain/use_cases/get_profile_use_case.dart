@@ -5,10 +5,10 @@ import 'package:hungry/core/use_cases/use_case.dart';
 import 'package:hungry/features/auth/domain/entities/user_entity.dart';
 import 'package:hungry/features/auth/domain/repos/auth_repo.dart';
 
-class GetProfileUseCase extends UseCase<UserEntity, NoParams> {
+class FetchProfileUseCase extends UseCase<UserEntity, NoParams> {
   final AuthRepo authRepo;
 
-  GetProfileUseCase({required this.authRepo});
+  FetchProfileUseCase({required this.authRepo});
   @override
   Future<Either<Failure, UserEntity>> call({required NoParams params}) async {
     final result = await authRepo.fetchProfile();

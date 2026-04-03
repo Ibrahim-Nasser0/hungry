@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hungry/core/shared/widgets/custom_botton.dart';
 import 'package:hungry/core/shared/widgets/custom_textfield.dart';
 import 'package:hungry/core/utils/app_router.dart';
+import 'package:hungry/core/utils/validators.dart';
 import 'package:hungry/features/auth/domain/use_cases/params/login_params.dart';
 import 'package:hungry/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 
@@ -49,11 +50,15 @@ class _LoginFormState extends State<LoginForm> {
           child: Column(
             children: [
               CustomTextfield(
+                keyboardType: TextInputType.emailAddress,
+                validator: (email) => emailValidator(email: email),
                 hint: 'Email Address',
                 controller: emailController,
               ),
               SizedBox(height: 20.h),
               CustomTextfield(
+                keyboardType: TextInputType.visiblePassword,
+                validator: (password) => passwordValidator(password: password),
                 hint: 'Password',
                 controller: passwordController,
                 obscure: true,

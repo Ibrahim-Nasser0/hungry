@@ -32,7 +32,7 @@ class ProfileView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: BlocProvider(
             create: (context) => ProfileCubit(
-              getProfileUseCase: getIt<GetProfileUseCase>(),
+              getProfileUseCase: getIt<FetchProfileUseCase>(),
               editProfileUseCase: getIt<EditProfileUseCase>(),
             ),
             child: Column(

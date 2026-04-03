@@ -10,7 +10,7 @@ import 'package:hungry/features/auth/presentation/view_model/signup_cubit/signup
 import 'package:hungry/features/auth/presentation/views/login_view.dart';
 import 'package:hungry/features/auth/presentation/views/signup_view.dart';
 import 'package:hungry/features/auth/presentation/views/splash_view.dart';
-import 'package:hungry/features/home/data/models/product_model.dart';
+import 'package:hungry/features/home/domain/entities/product_entite.dart';
 import 'package:hungry/features/product/presentation/views/product_details_view.dart';
 import 'package:hungry/nav_bar.dart';
 
@@ -65,7 +65,7 @@ abstract class AppRouter {
       GoRoute(
         path: productDetailsView,
         builder: (BuildContext context, GoRouterState state) {
-          final product = state.extra as ProductModel;
+          final product = state.extra as ProductEntite;
           return ProductDetailsView(product: product);
         },
       ),
